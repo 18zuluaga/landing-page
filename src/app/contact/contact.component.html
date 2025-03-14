@@ -16,10 +16,7 @@
       name="name"
       formControlName="name"
     />
-    <div
-      *ngIf="hasError('name', 'required')"
-      class="text-danger"
-    >
+    <div *ngIf="hasError('name', 'required')" class="text-danger">
       El nombre es obligatorio
     </div>
   </div>
@@ -39,11 +36,36 @@
       name="apellido"
       formControlName="apellido"
     />
-    <div
-      *ngIf="hasError('apellido', 'required')"
-      class="text-danger"
-    >
+    <div *ngIf="hasError('apellido', 'required')" class="text-danger">
       El apellido es obligatorio
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="tipoDocumento" class="form-label" id="tipoDocumento">Tipo de documento</label>
+    <select class="form-select" id="tipoDocumento" formControlName="tipoDocumento" >
+      <option value="TI">Tarjeta de identidad</option>
+      <option value="CC" >Cedula de ciudadania</option>
+      <option value="Pasaporte">Pasaporte</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="documento" class="form-label">{{TipoDocumento}}</label>
+    <input
+      [ngClass]="
+        formulario.get('documento')?.touched
+          ? formulario.get('documento')?.valid
+            ? 'is-valid'
+            : 'is-invalid'
+          : ''
+      "
+      type="text"
+      class="form-control"
+      id="documento"
+      name="documento"
+      formControlName="documento"
+    />
+    <div *ngIf="hasError('documento', 'required')" class="text-danger">
+      El {{TipoDocumento}} es obligatorio
     </div>
   </div>
   <div class="mb-3">
@@ -63,12 +85,14 @@
       formControlName="email"
     />
     <div
-      *ngIf="
-        hasError('email', 'required') || hasError('email', 'email')
-      "
+      *ngIf="hasError('email', 'required') || hasError('email', 'email')"
       class="text-danger"
     >
-      {{ hasError('email', 'required') ? 'El email es obligatorio' : 'Porfavor ingresa un email valido' }}
+      {{
+        hasError("email", "required")
+          ? "El email es obligatorio"
+          : "Porfavor ingresa un email valido"
+      }}
     </div>
   </div>
   <button type="submit" class="btn btn-outline-primary">Submit</button>

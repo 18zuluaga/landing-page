@@ -12,23 +12,21 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class ContactComponent implements OnInit {
 
   formulario: FormGroup
-  userActive = {
-    name: 'Fernando',
-    apellido: 'Gomez'
-  }
+  TipoDocumento = "CC"
 
 
   ngOnInit(): void {
-    // this.formulario.get('name')?.setValue(this.userName) forma para solo un campo
-    this.formulario.patchValue({name: this.userActive.name, apellido: this.userActive.apellido})
-    this.formulario.get('name')?.disable()
-    this.formulario.get('apellido')?.disable()
+    this.formulario.get('tipoDocumento')?.valueChanges.subscribe(value => {
+      this.TipoDocumento = value
+    })
   }
 
   constructor( private form: FormBuilder) {
     this.formulario = this.form.group({
       name: ['', Validators.required],
       apellido: ['', Validators.required],
+      documento: ['', Validators.required],
+      tipoDocumento: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     })
   }
