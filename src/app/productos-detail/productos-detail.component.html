@@ -1,0 +1,28 @@
+<ng-container *ngIf="!loading && product">
+  <h1></h1>
+  <h2></h2>
+  <div class="card">
+
+    <div class="card-body">
+      <h5 class="card-title">Producto: {{product.name}}</h5>
+      <p class="card-text" [ngStyle]="{'color': product.price > 20 ? 'red' : 'green' }">Precio: {{product.price | currency}}</p>
+      <p class="card-text" *ngIf="product?.description">Descripcion: {{product.description}}</p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="loading">
+  <div class="card" aria-hidden="true">
+    <div class="card-body">
+      <h5 class="card-title placeholder-glow">
+        <span class="placeholder col-6"></span>
+      </h5>
+      <p class="card-text placeholder-glow">
+        <span class="placeholder col-7"></span>
+        <span class="placeholder col-4"></span>
+        <span class="placeholder col-4"></span>
+        <span class="placeholder col-6"></span>
+      </p>
+    </div>
+  </div>
+</ng-container>
